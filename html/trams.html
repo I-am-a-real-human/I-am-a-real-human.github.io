@@ -53,7 +53,7 @@
         // read in tram services from geojson
         $.ajax({
             dataType: "json",
-            url: "/data/Tram_Services_ESPG4326.geojson",
+            url: "/data/GIS/Tram_Services_ESPG4326.geojson",
             success: function (data) {
                 // get array of ['properties']['ROUTESHTNM']
                 for (feat in data['features']) {
@@ -62,7 +62,7 @@
                     }
                 }
 
-                console.log(tram_services)
+                document.querySelector('#tram_service').innerHTML = "Find the " + get_random_tram() + " service";
             },
             error: function (data) {
                 console.log("Failed to load tram data");
@@ -76,6 +76,8 @@
             localStorage['tram_service'] =  random_tram;
             return  random_tram;
         }
+
+        
 
         document.querySelector('#new_tram').addEventListener('click', () => {
             document.querySelector('#tram_service').innerHTML = "Find the " + get_random_tram() + " service";
@@ -97,17 +99,15 @@
             dataType: "json",
             url: "/data/GIS/Tram_Services_ESPG4326.geojson",
             success: function (data) {
-                console.log(data);
                 tram_layer = L.geoJSON(data, { 'color': '#008966', 'weight': 3 })
                 tram_layer.addTo(map);
 
                 tram_layer.on('click', function (e) {
-                    console.log(e)
                     if (e['layer']['feature']['properties']['ROUTESHTNM'] === localStorage['tram_service']) {
-                        alert("Correct!");
+                        M.toast({html: 'Correct!', classes: 'green'}, 3000);
                         document.querySelector('#tram_service').innerHTML = "Find the " + get_random_tram() + " service";
                     } else {
-                        M.toast({html: 'Incorrect!'}, 3000);
+                        M.toast({html: 'Incorrect!', classes: 'red'}, 3000);
                     }
                 });
 
