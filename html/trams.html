@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" href=""> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-ajax/2.1.0/leaflet.ajax.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@turf/turf@6/turf.min.js"></script>
+
+</head>
+
+<style>
+    #map {
+        width: 90%;
+        aspect-ratio: 1 / 0.75;
+        margin: 5%;
+    }
+</style>
+
+<body>
+
+    <div class="container">
+        <h1>Tram Network</h1>
+
+        <h3 id="tram_service"></h3>
+        <button id="new_tram" class="waves-effect waves-light btn">New tram service</button>
+
+        <div id="map" style="display: flex; justify-content: center; align-items: center;"></div>
+
+    </div>
+
+
+    <script>
+
+        tram_services = [];
+        
+        // read in tram services from geojson
+        $.ajax({
+            dataType: "json",
+            url: "/data/Tram_Services_ESPG4326.geojson",
+            success: function (data) {
+                // get array of ['properties']['ROUTESHTNM']
+                for (feat in data['features']) {
+                    if (!tram_services.includes(data['features'][feat]['properties']['ROUTESHTNM'])) {
+                        tram_services.push(data['features'][feat]['properties']['ROUTESHTNM']);
+                    }
+                }
+
+                console.log(tram_services)
+            },
+            error: function (data) {
+                console.log("Failed to load tram data");
+            }
+        });
+
+        function get_random_tram() {
+            // get random value from tram_services
+            let random_index = Math.floor(Math.random() * tram_services.length);
+            let random_tram = tram_services[random_index];
+            localStorage['tram_service'] =  random_tram;
+            return  random_tram;
+        }
+
+        document.querySelector('#new_tram').addEventListener('click', () => {
+            document.querySelector('#tram_service').innerHTML = "Find the " + get_random_tram() + " service";
+        });
+    </script>
+
+    <script>
+        var map = L.map('map').setView([-37.814, 144.963], 11);
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+            maxZoom: 19,
+	        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            // attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+
+        var tram_layer;
+
+        $.ajax({
+            dataType: "json",
+            url: "/data/GIS/Tram_Services_ESPG4326.geojson",
+            success: function (data) {
+                console.log(data);
+                tram_layer = L.geoJSON(data, { 'color': '#008966', 'weight': 3 })
+                tram_layer.addTo(map);
+
+                tram_layer.on('click', function (e) {
+                    console.log(e)
+                    if (e['layer']['feature']['properties']['ROUTESHTNM'] === localStorage['tram_service']) {
+                        alert("Correct!");
+                        document.querySelector('#tram_service').innerHTML = "Find the " + get_random_tram() + " service";
+                    } else {
+                        M.toast({html: 'Incorrect!'}, 3000);
+                    }
+                });
+
+
+
+                // // COMPLEX - START  
+                // // add behaviour here
+                // tram_layer.on('click', function (e) {
+
+                //     console.log("coords: (" + e['latlng']['lat'] + ", " + e['latlng']['lng'] + ")");
+
+                //     // create small bounding box (equiv to approx 100m x 100m)
+                //     const click_bounds = e['latlng'].toBounds(100);
+                //     console.log(map.getZoom());
+
+                //     // DEBUG: show bounds
+                //     const box = L.rectangle(click_bounds, { color: 'red' }); // .addTo(map);
+
+                //     // if debug
+
+
+                //     var intersect_feats = [];
+
+                //     // for each layer in map._layers
+                //     for (const [key, value] of Object.entries(map._layers)) {
+                //         if (value._layers) {
+                //             for (const [fkey, feat] of Object.entries(value._layers)) {
+                //                 // console.log(turf.booleanIntersects(feat.toGeoJSON(), box.toGeoJSON()));
+                //                 if (turf.booleanIntersects(feat.toGeoJSON(), box.toGeoJSON())) {
+                //                     // check if feat is in intersect_feats
+                //                     if (!intersect_feats.includes(feat)) {
+                //                         intersect_feats.push(feat);
+                //                     }
+                //                 }
+                //             }
+                //         }
+                //     }
+
+                //     intersect_feats.forEach(element => {
+                //         console.log(element['feature']['properties']['ROUTESHTNM']);
+                //     });
+                // });
+                // // COMPLEX - END
+
+
+
+
+                // loop through layers
+                tram_layer.eachLayer(function (layer) {
+                    layer.on('mouseover', function (e) {
+                        // increase width and change colour to red
+                        e.target.bringToFront();
+                        e.target.setStyle({
+                            weight: 7,
+                            color: '#C70C6F'
+                        });
+                    });
+                    layer.on('mouseout', function (e) {
+                        e.target.setStyle({
+                            weight: 3,
+                            color: '#008966',
+                        });
+                    });
+                });
+
+                tram_layer.on('mouseout', function (e) {
+                    e.target.setStyle({
+                        weight: 3
+                    });
+                });
+
+            },
+            error: function (data) {
+                console.log("Failed to load tram data");
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>
