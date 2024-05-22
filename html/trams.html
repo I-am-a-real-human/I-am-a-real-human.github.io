@@ -31,6 +31,22 @@
         aspect-ratio: 1 / 0.75;
         margin: 5%;
     }
+    .leaflet-tooltip-top {
+  line-height: 1;
+  margin-top: 0px;
+}
+/* .leaflet-tooltip-top::before {
+  display: none
+} */
+.leaflet-tooltip {
+  padding-top: 1px;
+  padding-bottom: 0px;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+.leaflet-interactive {
+    outline: none;
+}
 </style>
 
 <body>
@@ -51,12 +67,19 @@
         <h1>Tram Network</h1>
 
         <h3 id="tram_service"></h3>
+        <span style="margin-right: 5%;">
+              <label>
+                <input id="check_show_numbers" type="checkbox" />
+                <span>Show service numbers</span>
+              </label>
+        </span>
+        <span>
         <button id="new_tram" class="waves-effect waves-light btn">New tram service</button>
+        </span>
 
         <div id="map" style="display: flex; justify-content: center; align-items: center;"></div>
 
     </div>
-
 
     <script>
 
@@ -65,7 +88,7 @@
         // read in tram services from geojson
         $.ajax({
             dataType: "json",
-            url: "/data/GIS/Tram_Services_ESPG4326.geojson",
+            url: "/data/GIS/Tram_Services_EPSG4326_singlepart.geojson",
             success: function (data) {
                 // get array of ['properties']['ROUTESHTNM']
                 for (feat in data['features']) {
@@ -89,10 +112,20 @@
             return  random_tram;
         }
 
-        
-
         document.querySelector('#new_tram').addEventListener('click', () => {
             document.querySelector('#tram_service').innerHTML = "Find the " + get_random_tram() + " service";
+        });
+
+        document.querySelector('#check_show_numbers').addEventListener('change', () => {
+            if (document.querySelector('#check_show_numbers').checked) {
+                tram_layer.eachLayer(function (layer) {
+                    layer.bindTooltip(layer.feature.properties.ROUTESHTNM);
+                });
+            } else {
+                tram_layer.eachLayer(function (layer) {
+                    layer.unbindTooltip();
+                });
+            }
         });
     </script>
 
@@ -109,9 +142,17 @@
 
         $.ajax({
             dataType: "json",
-            url: "/data/GIS/Tram_Services_ESPG4326.geojson",
+            url: "/data/GIS/Tram_Services_EPSG4326_singlepart.geojson",
             success: function (data) {
-                tram_layer = L.geoJSON(data, { 'color': '#008966', 'weight': 3 })
+                tram_layer = L.geoJSON(data, { 
+                    'color': '#008966',
+                    'weight': 3,
+                    // onEachFeature: function (feature, layer) {
+                    //     var label = feature.properties.ROUTESHTNM;
+                    //     layer.bindTooltip(label);
+                    // }
+                });
+
                 tram_layer.addTo(map);
 
                 tram_layer.on('click', function (e) {
