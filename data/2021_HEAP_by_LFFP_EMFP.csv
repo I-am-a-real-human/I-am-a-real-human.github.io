@@ -1,0 +1,58 @@
+EMFP Employment Flag,LFFP Labour Force Participation Flag,Employed,Unemployed or not in the labour force,Not applicable - Exclude from table
+"Postgraduate Degree Level, nfd",Participates in the Labour Force,16623,396,0
+Doctoral Degree Level,Participates in the Labour Force,156222,4806,0
+Master Degree Level,Participates in the Labour Force,919809,36193,0
+"Graduate Diploma and Graduate Certificate Level, nfd",Participates in the Labour Force,33534,999,0
+Graduate Diploma Level,Participates in the Labour Force,260270,6506,0
+Graduate Certificate Level,Participates in the Labour Force,82749,1895,0
+Bachelor Degree Level,Participates in the Labour Force,2797742,91473,0
+"Advanced Diploma and Diploma Level, nfd",Participates in the Labour Force,9493,495,0
+Advanced Diploma and Associate Degree Level,Participates in the Labour Force,461428,16889,0
+Diploma Level,Participates in the Labour Force,865473,36886,0
+Certificate III & IV Level,Participates in the Labour Force,2355547,102247,0
+Secondary Education - Years 10 and above,Participates in the Labour Force,3241923,264393,0
+Certificate I & II Level,Participates in the Labour Force,6311,1178,0
+Secondary Education - Years 9 and below,Participates in the Labour Force,319971,49228,0
+Level of education inadequately described,Participates in the Labour Force,282486,14986,0
+No educational attainment,Participates in the Labour Force,31519,4439,0
+Not stated,Participates in the Labour Force,208313,13428,0
+Not applicable,Participates in the Labour Force,0,0,0
+Total,Participates in the Labour Force,12049410,646442,0
+"Postgraduate Degree Level, nfd",Not in the Labour Force,0,3398,0
+Doctoral Degree Level,Not in the Labour Force,0,44627,0
+Master Degree Level,Not in the Labour Force,0,174288,0
+"Graduate Diploma and Graduate Certificate Level, nfd",Not in the Labour Force,0,6868,0
+Graduate Diploma Level,Not in the Labour Force,0,89827,0
+Graduate Certificate Level,Not in the Labour Force,0,12680,0
+Bachelor Degree Level,Not in the Labour Force,0,712336,0
+"Advanced Diploma and Diploma Level, nfd",Not in the Labour Force,0,2888,0
+Advanced Diploma and Associate Degree Level,Not in the Labour Force,0,290621,0
+Diploma Level,Not in the Labour Force,0,257327,0
+Certificate III & IV Level,Not in the Labour Force,0,867475,0
+Secondary Education - Years 10 and above,Not in the Labour Force,0,2608059,0
+Certificate I & II Level,Not in the Labour Force,0,9223,0
+Secondary Education - Years 9 and below,Not in the Labour Force,0,1103820,0
+Level of education inadequately described,Not in the Labour Force,0,206313,0
+No educational attainment,Not in the Labour Force,0,137521,0
+Not stated,Not in the Labour Force,0,360815,0
+Not applicable,Not in the Labour Force,0,0,0
+Total,Not in the Labour Force,0,6888081,0
+"Postgraduate Degree Level, nfd",Total,16623,3800,37
+Doctoral Degree Level,Total,156222,49431,367
+Master Degree Level,Total,919809,210486,2657
+"Graduate Diploma and Graduate Certificate Level, nfd",Total,33534,7861,111
+Graduate Diploma Level,Total,260270,96335,439
+Graduate Certificate Level,Total,82749,14576,72
+Bachelor Degree Level,Total,2797742,803811,7697
+"Advanced Diploma and Diploma Level, nfd",Total,9493,3382,329
+Advanced Diploma and Associate Degree Level,Total,461428,307510,2347
+Diploma Level,Total,865473,294217,2569
+Certificate III & IV Level,Total,2355547,969721,14812
+Secondary Education - Years 10 and above,Total,3241923,2872450,34850
+Certificate I & II Level,Total,6311,10407,73
+Secondary Education - Years 9 and below,Total,319971,1153050,17424
+Level of education inadequately described,Total,282486,221302,2472
+No educational attainment,Total,31519,141961,2370
+Not stated,Total,208313,374237,1112224
+Not applicable,Total,0,0,4638004
+Total,Total,12049410,7534525,5838852
