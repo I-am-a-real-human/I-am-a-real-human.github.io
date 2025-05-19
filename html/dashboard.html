@@ -13,61 +13,186 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+        integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="/css/scroller.css">
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/5.16.0/d3.min.js"></script>
-    <script src = 'https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.25.6/d3-legend.min.js'></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
+    <script src="https://unpkg.com/scrollama"></script>
+
 </head>
 
 <body>
-    <nav>
-        <div class="nav-wrapper">
-            <a href="/index.html" class="brand-logo">Home</a>
-            <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down">
-                <li><a href="/html/trams.html">Tram Network test</a></li>
-                <li><a href="/html/dashboard.html">Example dashboard</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <ul class="sidenav" id="nav-mobile">
-        <li><a href="/html/trams.html">Tram Network test</a></li>
-        <li><a href="/html/dashboard.html">Example dashboard</a></li>
-    </ul>
-
-    <div class="container">
-        <div id="tooltip"></div>
-        <h2>2021 Census Skills Analysis</h2>
-        <div id="graphics">
-            <div id="sections">
-                <section class="step">
-                    <p>
-                        In the 2021 ABS Census, almost 500,000 Victorians 
-                        were enumerated as studying in some kind of tertiary or
-                        post-secondary institution.
-                    </p>
-                </section>
-                <section class="step">
-                    <h2>Age breakdown</h2>
-                    <p>explanatory text</p>
-                </section>
-                <section class="step" id="extra-space">
-                    <h2>Another title</h2>
-                    <p>explanatory text</p>
-                </section>
+    <main>
+        <nav>
+            <div class="nav-wrapper">
+                <a href="/index.html" class="brand-logo">Home</a>
+                <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="/html/trams.html">Tram Network test</a></li>
+                    <li><a href="/html/dashboard.html">Example dashboard</a></li>
+                </ul>
             </div>
-            <div id="vis">
-    
-            </div>
-        </div>
-    </div>
+        </nav>
 
-    
+        <ul class="sidenav" id="nav-mobile">
+            <li><a href="/html/trams.html">Tram Network test</a></li>
+            <li><a href="/html/dashboard.html">Example dashboard</a></li>
+        </ul>
+
+        <div class="container">
+            <section id="intro">
+                <h1>VICTORIAN SKILLS DATA ANALYSIS</h1>
+                <p>
+                    This page provides an analysis of data taken from the
+                    <a href="https://www.vic.gov.au/employment-projections-dashboard" target="_blank">
+                        Victorian Employment Projections Dashboard <i class="fa fa-external-link"
+                            aria-hidden="true"></i></a>
+                    provided by the Victorian Skills Authority.
+                </p>
+                <p>
+                    Start scrolling to begin the analysis.
+                </p>
+            </section>
+            <section id="scrolly">
+                <article>
+                    <div class="step" data-step="1">
+                        <p>
+                            In 2024 over 3.6 million Victorians were employed in a variety of occupations. The bubbles
+                            on the
+                            right each represent a different industry, with the size of the bubble representing the
+                            number of
+                            people employed in that industry.
+                            <br>
+                            <br>
+                            The largest sector in terms of employment was the <mark class="industry-text">Health Care
+                                and Social Assistance</mark> sector,
+                            with 570,000 people employed.
+
+                        </p>
+                    </div>
+                    <div class="step" data-step="2">
+                        <p>
+                            <span class="industry-text">Health Care</span> is not just large in 2024, it is also
+                            expected to be
+                            one of the fastest growing sectors in Victoria with an annual
+                            growth rate of 2.8% between 2024 and 2027.
+                            <br>
+                            <br>
+                            This is only outmatched by the <span class="industry-text">Construction</span> sector, which
+                            is
+                            expected to grow at a rate of 4.2% between 2024 and 2027.
+                            <br>
+                            <br>
+                            The graph on the right show the number of new workers entering <a class="tooltipped"
+                                data-position="top"
+                                data-tooltip="Agriculture, forestry and fishing has been removed due to no matching ABS data">each
+                                industry</a> in 2027
+                            compared to the total number of <a
+                                href="https://www.abs.gov.au/statistics/labour/jobs/job-vacancies-australia/latest-release"
+                                target="_blank" class="tooltipped" data-position="top"
+                                data-tooltip="Data has been sourced from the April 2025 release of 'Job Vacancies, Australia' by the ABS">national
+                                job vacancies</a>.
+                            <br>
+                            <br>
+
+
+
+                        </p>
+                    </div>
+                    <div class="step" data-step="3">
+                        <p>
+                            Given that the vacancy data presented is at a national level,
+                            it is interesting that a pretty linear relationship exists between
+                            the vacancy data and the expected employment growth.
+                            <br>
+                            <br>
+                            Some exceptions to this are <span class="industry-text">Construction</span>,
+                            <span class="industry-text">Accommodation and food services</span> and
+                            <span class="industry-text">Education and training</span>.
+                        </p>
+                    </div>
+                    <div class="step" data-step="4">
+                        <p>
+                            Let's take a closer look at <span class="industry-text">Health Care and Social
+                                Assistance</span>.
+                        </p>
+                    </div>
+                    <div class="step" data-step="5">
+                        <p>
+                            This plot shows the income distribution for workers in
+                            <span class="industry-text">Health Care and Social Assistance</span>.
+                            as of the 2021 Census. The most common income band is $1,000-$1,249 a week (or $52)
+                        </p>
+                        <p>
+                            Lastly, let's look at data at a regional level.
+                        </p>
+                    </div>
+                    <div class="step" data-step="6">
+                        <p>
+                            The dots on the right represent each occupation listed under the
+                            <span class="industry-text">Health Care and Social Assistance</span> industry in
+                            identified under several <a
+                                href="https://www.rdv.vic.gov.au/regional-partnerships/partnerships">regional
+                                partnerships</a>.
+                            <br>
+                            <br>
+                            The size of the bubble represents the number of people employed in that occupation.
+                            <br>
+                            Some things become immediately clear:
+                        </p>
+                        <ul class="browser-default">
+                            <li>First, the centre of gravity for the industry
+                                is clearly Metropolitan Melbourne, with over
+                                70% of the occupations in the industry.
+                            </li>
+                            <li>Second, in any region the largest occupation is
+                                registered nurses, with 60,000 in Metropolitan Melbourne alone.
+                            </li>
+                        </ul>
+                        <p>
+                            The other main occupation is in aged and disabled care.
+                        </p>
+                    </div>
+                </article>
+
+                <figure>
+                    <p>0</p>
+                    <!-- add tooltip -->
+                </figure>
+
+
+
+
+            </section>
+        </div>
+
+
+    </main>
+    <div id="tooltip" class="tooltip"></div>
 </body>
 
+<script>
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
 
-<script src="/js/scroller.js" defer></script>
-<script src="/js/sections.js" defer></script>
+    $(document).ready(function () {
+        $('.tooltipped').tooltip();
+        $('.tooltipped').click(function () {
+            $('.tooltip').open();
+        });
+        window.addEventListener('DOMContentLoaded', function () {
+            window.scrollTo(0, 0);
+        });
+    });
+</script>
+
+<script src="/js/scrollama.js" defer></script>
+<!-- <script src="/js/scroller.js" defer></script> -->
+<!-- <script src="/js/sections.js" defer></script> -->
+
 </html>

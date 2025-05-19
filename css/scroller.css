@@ -21,7 +21,7 @@
   
   .step {
     margin-bottom: 200px;
-    font-family: "Roboto", sans-serif;
+    font-family: "Roboto Light", sans-serif;
     font-size: 16px;
     line-height: 23px;
     color: #767678;
@@ -79,4 +79,125 @@
   
   }
   
+  * {
+    box-sizing: border-box;
+}
+
+#intro {
+    max-width: 40rem;
+    margin: 1rem auto;
+  }
   
+  #intro h1 {
+  text-align: center;
+  }
+
+.intro__dek {
+    color: #8a8a8a;
+}
+
+.github-corner:hover .octo-arm {
+    animation: octocat-wave 560ms ease-in-out;
+}
+
+
+
+#intro {
+    margin-bottom: 320px;
+}
+
+#outro {
+    height: 640px;
+}
+
+@media (min-width: 840px) {
+    .nav__examples {
+        margin-top: 0;
+        margin-left: 2rem;
+    }
+}
+
+#scrolly {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 1rem;
+}
+
+#scrolly>* {
+    -webkit-box-flex: 1;
+    -ms-flex: 1;
+    flex: 1;
+}
+
+article {
+    position: relative;
+    padding: 0 1rem;
+    max-width: 20rem;
+}
+
+figure {
+    position: -webkit-sticky;
+    position: sticky;
+    width: 100%;
+    margin: 0;
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    /* background-color: #8a8a8a; */
+    z-index: 0;
+}
+
+#tooltip {
+  position: absolute;
+  pointer-events: none;
+  background-color: white;
+  border: solid;
+  border-width: 2px;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 12px;
+}
+
+.step {
+    margin: 0 auto 2rem auto;
+    /* background-color: #3b3b3b; */
+    color: #fff;
+    opacity: 0;
+    transition: opacity 0.5s ease-in;
+    align-content: center;
+    
+}
+
+.step:last-child {
+    margin-bottom: 0;
+}
+
+ul {
+  list-style-type: circle !important
+}
+
+.step.is-active {
+  color: #3b3b3b;
+  /* add transition animation  */ 
+  opacity: 1;
+  transition: opacity 0.5s ease-in;
+
+}
+
+.step p {
+    text-align: left;
+    padding: 1rem;
+    font-size: 1.5rem;
+}
+
+.industry-text {
+  display: inline;
+  text-align: left;
+  font-size: 1.5rem;
+}
+
+.industry-text mark {
+  padding: 0 0.1em;
+}
