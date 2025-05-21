@@ -39,6 +39,10 @@
   }
 }
 
+.size-growth-y-label .size-growth-x-label {
+  font-family: "Roboto Light", sans-serif;
+  
+}
 
 .container {
     width: 890px;
