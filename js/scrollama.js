@@ -363,7 +363,9 @@ function size_by_growth() {
     });
 
     d3.select('.size-growth-x-axis').transition().attr('opacity', 1)
+    d3.select('.size-growth-x-label').transition().attr('opacity', 1)
     d3.select('.size-growth-y-axis').transition().attr('opacity', 1)
+    d3.select('.size-growth-y-label').transition().attr('opacity', 1)
 
 }
 
@@ -642,13 +644,17 @@ function handleStepExit(response) {
                 // hide the x and y axis
             if (response.direction === "up") {
                 d3.select('.size-growth-x-axis').transition().attr('opacity', 0)
+                d3.select('.size-growth-x-label').transition().attr('opacity', 0)
                 d3.select('.size-growth-y-axis').transition().attr('opacity', 0)
+                d3.select('.size-growth-y-label').transition().attr('opacity', 0)
             }
             break;
             case 2:
                 if (response.direction === "down") {
                 d3.select('.size-growth-x-axis').transition().attr('opacity', 0)
+                d3.select('.size-growth-x-label').transition().attr('opacity', 0)
                 d3.select('.size-growth-y-axis').transition().attr('opacity', 0)
+                d3.select('.size-growth-y-label').transition().attr('opacity', 0)
             }
             path.style("display", "none");
             break;
@@ -679,6 +685,23 @@ function init() {
 
     // 1. force a resize on load to ensure proper dimensions are sent to scrollama
     handleResize();
+    
+    // create scale for income categories using health_income Weekly_Income values
+    xIncomeScale = d3.scaleBand().domain(["$1-$149", "$150-$299", "$300-$399", "$400-$499", "$500-$649", "$650-$799", "$800-$999", "$1,000-$1,249", "$1,250-$1,499", "$1,500-$1,749", "$1,750-$1,999", "$2,000-$2,999", "$3,000-$3,499", "$3,500 or more"]).range([50, width - 50]);
+    yIncomeScale = d3.scaleLinear().domain([0, d3.max(health_income, d => d.Count)]).range([height - 50, 50]);
+
+    xIncomeAxis = d3.axisBottom(xIncomeScale);
+    yIncomeAxis = d3.axisLeft(yIncomeScale);
+    
+    
+    xCentroidScale = d3.scaleLinear().domain([0, d3.max(region_shapes, d => d.centroid[0])]).range([50, width - 50]);
+    yCentroidScale = d3.scaleLinear().domain([0, d3.max(region_shapes, d => d.centroid[1])]).range([height - 50, 50]);
+    
+
+
+    const x_offset = 10;
+    const y_offset = 10;
+    
 
     yScale = d3.scaleLinear()
         .domain([d3.min(industry_data, d => d.Total_new_workers_expected_by_2027), d3.max(industry_data, d => d.Total_new_workers_expected_by_2027)])
@@ -687,21 +710,7 @@ function init() {
     // Update the x-axis scale
     xScale = d3.scaleLinear()
         .domain([d3.min(industry_data, d => d.Feb_25_Vacancies * 1000), d3.max(industry_data, d => d.Feb_25_Vacancies * 1000)])
-        .range([50, width - 50]);
-
-    // create scale for income categories using health_income Weekly_Income values
-    xIncomeScale = d3.scaleBand().domain(["$1-$149", "$150-$299", "$300-$399", "$400-$499", "$500-$649", "$650-$799", "$800-$999", "$1,000-$1,249", "$1,250-$1,499", "$1,500-$1,749", "$1,750-$1,999", "$2,000-$2,999", "$3,000-$3,499", "$3,500 or more"]).range([50, width - 50]);
-    yIncomeScale = d3.scaleLinear().domain([0, d3.max(health_income, d => d.Count)]).range([height - 50, 50]);
-
-    xIncomeAxis = d3.axisBottom(xIncomeScale);
-    yIncomeAxis = d3.axisLeft(yIncomeScale);
-
-
-    xCentroidScale = d3.scaleLinear().domain([0, d3.max(region_shapes, d => d.centroid[0])]).range([50, width - 50]);
-    yCentroidScale = d3.scaleLinear().domain([0, d3.max(region_shapes, d => d.centroid[1])]).range([height - 50, 50]);
-
-
-
+        .range([50 + x_offset, width - 50]);
 
     // Create axis generators
     xAxis = d3.axisBottom(xScale);
@@ -716,15 +725,31 @@ function init() {
         .attr("class", "size-growth-x-axis")
         .attr('opacity', 0);
 
+    svg.append("text")
+        .attr("class", "size-growth-x-label")
+        .attr("text-anchor", "middle")
+        .attr("x", width / 2)              
+        .attr("y", height - 10)            
+        .text("National Job Vacancies")
+        .attr('opacity', 0);
+
     // Add the y-axis
     svg.append("g")
-        .attr("transform", `translate(50, 0)`)
+        .attr("transform", `translate(${50 + x_offset}, ${y_offset})`)
         .call(yAxis)
         .attr("class", "size-growth-y-axis")
         .attr('opacity', 0);
 
+
+    svg.append("text")
+        .attr("class", "size-growth-y-label")
+        .attr("text-anchor", "middle")
+        .attr("transform", `translate(15, ${height / 2}) rotate(-90)`) // rotate and position
+        .text("New workers by 2027")
+        .attr('opacity', 0);
+
     svg.append("g")
-        .attr("transform", `translate(0, ${height - 60})`)
+        .attr("transform", `translate(0, ${height - 50})`)
         .call(xIncomeAxis)
         .attr("class", "income-x-axis")
         .attr('opacity', 0)
