@@ -1,6 +1,45 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
 
+@media (max-width: 767px) {
+  #scrolly {
+    flex-direction: column; /* stack vertically */
+  }
+
+  article {
+    max-width: 100%;  /* full width */
+    padding: 0 1rem;
+  }
+
+  figure {
+    position: sticky;  /* keep figure sticky */
+    top: 1rem;         /* small offset from top */
+    width: 90vw;       /* almost full viewport width */
+    margin: 1rem auto; /* center horizontally */
+    z-index: 10;       /* ensure above background */
+  }
+
+  #sections {
+    width: 100%;       /* full width steps container */
+    display: block;    /* no inline-block */
+    padding-bottom: 2rem;
+  }
+
+  .step {
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem; /* slightly larger for readability */
+  }
+
+  #vis {
+    position: sticky !important; /* override fixed */
+    top: 1rem;
+    margin-left: 0;
+    width: 90vw;
+    height: auto; /* adjust height if needed */
+  }
+}
+
+
 .container {
     width: 890px;
   }
