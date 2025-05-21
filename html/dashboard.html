@@ -46,25 +46,26 @@
         <div class="container">
             <section id="intro">
                 <h1>VICTORIAN SKILLS DATA ANALYSIS</h1>
-                <p>
+                <p class="flow-text">
                     This page provides an analysis of data taken from the
                     <a href="https://www.vic.gov.au/employment-projections-dashboard" target="_blank">
                         Victorian Employment Projections Dashboard <i class="fa fa-external-link"
-                            aria-hidden="true"></i></a>
-                    provided by the Victorian Skills Authority.
-                </p>
-                <p>
+                        aria-hidden="true"></i></a>
+                        provided by the Victorian Skills Authority.
+                    </p>
+                <p class="flow-text">
                     This analysis is in no way official or endorsed by the Victorian 
                     Skills Authority or ABS, and is meant only as a test of the D3 
                     and Scrollama JavaScript libraries.
                 </p>
-                <p>
+                <p class="flow-text">
                     Start scrolling to begin the analysis.
                 </p>
             </section>
             <section id="scrolly">
                 <article>
                     <div class="step" data-step="1">
+                        <br>
                         <p>
                             In 2024 over 3.6 million Victorians were employed in a variety of occupations. The bubbles
                             on the
@@ -76,7 +77,9 @@
                             The largest sector in terms of employment was the <mark class="industry-text">Health Care
                                 and Social Assistance</mark> sector,
                             with 570,000 people employed.
-
+                            <br>
+                            <br>
+                            Hover over a circle for more information.
                         </p>
                     </div>
                     <div class="step" data-step="2">
@@ -173,10 +176,19 @@
                                 registered nurses, with 60,000 in Metropolitan Melbourne alone.
                             </li>
                         </ul>
-                        <p>
-                            The second most common occupation is in aged and disabled care.
-                        </p>
                     </div>
+                    <div class="step" data-step="7">
+                        <p>
+                            In general, the most numerous (and largely the 
+                            fastest-growing) occupations are in nursing,
+                            aged, child and disabled care, nursing support 
+                            and receptionists. It's no surprise then that Nursing, Community Services and Childhood support are
+                            all currently listed in <a href="https://www.vic.gov.au/free-tafe">Victoria's Free TAFE priority pathways <i class="fa fa-external-link"
+                            aria-hidden="true"></i></a>
+                        </p>
+
+                    </div>
+
        
                 </article>
 
@@ -186,8 +198,8 @@
                 </figure>
 
             </section>
-            <section id="outro">
-                <br>
+            <section style="margin-top: 400px;" id="outro">
+
                 <h3>Attributions</h3>
                 <p class="flow-text">
                     This scroller was created using the <a target="_blank" href="https://github.com/russellsamora/scrollama">Scrollama</a> and <a target="_blank" href="https://d3js.org">D3</a> JavaScript libraries.
