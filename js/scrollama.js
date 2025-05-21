@@ -637,16 +637,16 @@ function handleStepExit(response) {
             }
             simulation.stop();
             break;
-        case 1:
-            console.log("Exiting step 1");
-            // hide the x and y axis
+            case 1:
+                console.log("Exiting step 1");
+                // hide the x and y axis
             if (response.direction === "up") {
                 d3.select('.size-growth-x-axis').transition().attr('opacity', 0)
                 d3.select('.size-growth-y-axis').transition().attr('opacity', 0)
             }
             break;
-        case 2:
-            if (response.direction === "down") {
+            case 2:
+                if (response.direction === "down") {
                 d3.select('.size-growth-x-axis').transition().attr('opacity', 0)
                 d3.select('.size-growth-y-axis').transition().attr('opacity', 0)
             }
@@ -654,10 +654,16 @@ function handleStepExit(response) {
             break;
         case 3:
             break;
-
-        case 4:
-            d3.select('.income-x-axis').transition().attr('opacity', 0)
-            d3.select('.income-y-axis').transition().attr('opacity', 0)
+            
+            case 4:
+                d3.select('.income-x-axis').transition().attr('opacity', 0)
+                d3.select('.income-y-axis').transition().attr('opacity', 0)
+            break
+        case 5:
+            console.log("Exiting step 5");
+            if (response.direction === "down") {
+                svg.transition().duration(500).attr('opacity', 0);
+            }
             break
     }
 
