@@ -30,7 +30,7 @@
 
 <style>
     #map {
-        width: 70%;
+        width: 90%;
         aspect-ratio: 1 / 0.75;
         margin: 5%;
     }
@@ -57,6 +57,7 @@
     .highlight-row {
         background-color: #a5c2f2 !important;
     }
+
 </style>
 
 <body>
@@ -78,25 +79,29 @@
         <li><a href="/html/project-tracker.html">Example project update tool</a></li>
     </ul>
     <div class="container">
-        <h1>Project Viewer</h1>
+    <h1>Project Viewer</h1>
 
-        <p class="flow-text">
-            This page provides an example approach for showing project details in
-            a range of study areas. Some sample projects have been added that can be
-            zoomed to to get some of the project details. Hover over a project to see which
-            table item it corresponds to, and vice versa.
-        </p>
+    <p class="flow-text">
+        This page provides an example approach for showing project details in
+        a range of study areas. Some sample projects have been added that can be
+        zoomed to to get some of the project details. Hover over a project to see which
+        table item it corresponds to, and vice versa.
+    </p>
+</div>
+    <div class="section" >
 
-
-
-        <div id="map" style="display: flex; justify-content: center; align-items: center;"></div>
-
-        <h2>Project details</h2>
-        <div id="project_table"></div>
-
+        <div class="row">
+        <div class="col s7">
+            <div id="map" style="display: flex; justify-content: center; align-items: center;"></div>
+        </div>
+        
+        <div class="col s5">
+            <h3>Project details</h3>
+            <div id="project_table"></div>
+        </div>
+        </div>
         <!-- create some space below table -->
         <div style="height: 100px;"></div>
-
     </div>
 
 
